@@ -27,7 +27,7 @@
 
 import itertools
 
-ranks = list("2 3 4 5 6 7 8 9 T J Q K A".split())
+ranks = "2 3 4 5 6 7 8 9 T J Q K A".split()
 red_suits = [ 'H', 'D' ]
 black_suits = [ 'S', 'C' ]
 
@@ -39,20 +39,14 @@ jokers['B'] = [ r + s for s in black_suits for r in ranks ]
 def best_wild_hand(hand):
     "Try all values for jokers in all 5-card selections."
 
-    print hand
-    wildhand = itertools.new()
-    #c = [ jokers[ c[1] ] for c in hand if c.find('?') == 0 ]
+    wildhand = []
     for c in hand:
         if c.find('?') == 0:
-            wildhand.chain(jokers[c[1]])
+            wildhand += jokers[c[1]]
         else:
             wildhand.append(c)
     
-    print wildhand
-    wildhand = itertools.chain(wildhand)
-    print wildhand
-
-    return max(itertools.combinations(hand, 5), key=hand_rank)
+    return max(itertools.combinations(wildhand, 5), key=hand_rank)
 
 # ------------------
 # Provided Functions
@@ -118,6 +112,7 @@ def two_pair(ranks):
         return None
 
 def test_best_wild_hand():
+    #print (best_wild_hand("6C 7C 8C 9C TC 5C ?B".split()))
     assert (sorted(best_wild_hand("6C 7C 8C 9C TC 5C ?B".split()))
             == ['7C', '8C', '9C', 'JC', 'TC'])
     assert (sorted(best_wild_hand("TD TC 5H 5C 7C ?R ?B".split()))
