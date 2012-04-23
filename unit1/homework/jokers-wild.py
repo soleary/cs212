@@ -33,26 +33,19 @@ black_suits = 'S C'.split()
 
 jokers = {}
 
-jokers['R'] = [ r + s for s in red_suits for r in ranks ]
+jokers['R'] = [ r + s for s in red_suits   for r in ranks ]
 jokers['B'] = [ r + s for s in black_suits for r in ranks ]
 
 def best_wild_hand(hand):
     "Try all values for jokers in all 5-card selections."
     
-    hands = []
-    wildhand = []
-    for c in hand:
-        if c.find('?') == 0:
-            hands.appmaxlistend(build_wild_hands(wildhand, c[1])) 
-            #+= jokers[c[1]]
-        else:
-            wildhand.append(c)
-    print hands
-    return max(itertools.combinations(wildhand, 5), key=hand_rank)
+    hands = itertools.combinations(hand, 5)
+    for hand in hands:
+            
+    return max(sub_wilds(hand), key=hand_rank) 
 
-def build_wild_hands(hand, color):
-    print [ hand.append(c) for c in jokers[color] ]
-    return None
+def sub_wilds(hand, joker):
+
 
 # ------------------
 # Provided Functions
