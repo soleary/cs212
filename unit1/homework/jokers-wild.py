@@ -27,24 +27,48 @@
 
 import itertools
 
-ranks = "2 3 4 5 6 7 8 9 T J Q K A".split()
-red_suits = "H D".split()
-black_suits = 'S C'.split()
+allranks = "2 3 4 5 6 7 8 9 T J Q K A".split()
+suit_colors = { 
+    "R": "H D".split(), 
+    "B": "S C".split(),
+}
 
-jokers = {}
+print suit_colors
 
-jokers['R'] = [ r + s for s in red_suits   for r in ranks ]
-jokers['B'] = [ r + s for s in black_suits for r in ranks ]
+#jokers['R'] = [ r + s for s in red_suits   for r in ranks ]
+#jokers['B'] = [ r + s for s in black_suits for r in ranks ]
 
 def best_wild_hand(hand):
     "Try all values for jokers in all 5-card selections."
     
     hands = itertools.combinations(hand, 5)
     for hand in hands:
+        if (has_wilds(hand):
+            hands.append(sub_wilds(hand))
+        else:
+            next
             
     return max(sub_wilds(hand), key=hand_rank) 
 
-def sub_wilds(hand, joker):
+def sub_wilds(hand):
+    wild = find_wild(hand)
+    color = hand[wild][1]
+    retval = []
+    for card in [ r + s for s in suit_colors[color] for r in allranks ]:
+        newhand = hand
+        newhand[wild] = card
+        retval.append(newhand)
+
+    # Need to recurse to see if the hands made above have wilds in them
+    return retval
+
+def has_wilds(hand): return sum([ card.find('?') for card in hand ]) == -5
+
+def find_wild(hand):
+    for i in range(len(hand)):
+        if (hand[i].find('?') == 0):
+            return i
+    return -1
 
 
 # ------------------
