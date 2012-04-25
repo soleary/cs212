@@ -38,28 +38,25 @@ jokers['B'] = [ r + s for s in black_suits for r in allranks ]
 
 def best_wild_hand(hand):
     "Try all values for jokers in all 5-card selections."
-    allhands = []
-    hands = itertools.combinations(hand, 5)
-    for hand in hands:
-        allhands.append(process_hand(list(hand)))
+    hands = []
+    for hand in itertools.combinations(hand, 5):
+        print hand
+        hands.append(process_hand(list(hand)))
             
-    return max(allhands, key=hand_rank) 
+    return max(hands, key=hand_rank) 
 
 def process_hand(hand):
     
-    if (not hand):
-        return
-
     wild_hand, wild_card = find_wild(hand) 
 
     if (wild_card == None):
         return hand
+    
+    for hand in expand_wild(wild_hand, wild_card):
+        process_hand(hand)
 
-    return [ process_hand(wild_hand.append(card)) for card in jokers[wild_card[1]] ]
 
 def find_wild(hand):
-    print hand
-
     for i in range(len(hand)):
         if (hand[i].find('?') == 0):
             wild_card = hand[i]
@@ -68,6 +65,8 @@ def find_wild(hand):
 
     return hand, None
 
+def expand_wild(hand, wild_card):
+    return [ hand.append(card) for card in jokers[wild_card[1]] ]
 
 # ------------------
 # Provided Functions
