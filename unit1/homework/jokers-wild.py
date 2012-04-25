@@ -27,48 +27,46 @@
 
 import itertools
 
-allranks = "2 3 4 5 6 7 8 9 T J Q K A".split()
-suit_colors = { 
-    "R": "H D".split(), 
-    "B": "S C".split(),
-}
+allranks = "23456789TJQKA"
+red_suits = "HD"
+black_suits = "SC"
 
-print suit_colors
+jokers = {}
 
-#jokers['R'] = [ r + s for s in red_suits   for r in ranks ]
-#jokers['B'] = [ r + s for s in black_suits for r in ranks ]
+jokers['R'] = [ r + s for s in red_suits   for r in allranks ]
+jokers['B'] = [ r + s for s in black_suits for r in allranks ]
 
 def best_wild_hand(hand):
     "Try all values for jokers in all 5-card selections."
-    
+    allhands = []
     hands = itertools.combinations(hand, 5)
     for hand in hands:
-        if (has_wilds(hand):
-            hands.append(sub_wilds(hand))
-        else:
-            next
+        allhands.append(process_hand(list(hand)))
             
-    return max(sub_wilds(hand), key=hand_rank) 
+    return max(allhands, key=hand_rank) 
 
-def sub_wilds(hand):
-    wild = find_wild(hand)
-    color = hand[wild][1]
-    retval = []
-    for card in [ r + s for s in suit_colors[color] for r in allranks ]:
-        newhand = hand
-        newhand[wild] = card
-        retval.append(newhand)
+def process_hand(hand):
+    
+    if (not hand):
+        return
 
-    # Need to recurse to see if the hands made above have wilds in them
-    return retval
+    wild_hand, wild_card = find_wild(hand) 
 
-def has_wilds(hand): return sum([ card.find('?') for card in hand ]) == -5
+    if (wild_card == None):
+        return hand
+
+    return [ process_hand(wild_hand.append(card)) for card in jokers[wild_card[1]] ]
 
 def find_wild(hand):
+    print hand
+
     for i in range(len(hand)):
         if (hand[i].find('?') == 0):
-            return i
-    return -1
+            wild_card = hand[i]
+            del hand[i]
+            return hand, wild_card
+
+    return hand, None
 
 
 # ------------------
@@ -102,6 +100,7 @@ def hand_rank(hand):
 
 def card_ranks(hand):
     "Return a list of the ranks, sorted with higher first."
+    print hand
     ranks = ['--23456789TJQKA'.index(r) for r, s in hand]
     ranks.sort(reverse = True)
     return [5, 4, 3, 2, 1] if (ranks == [14, 5, 4, 3, 2]) else ranks
