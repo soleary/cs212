@@ -46,15 +46,17 @@ def best_wild_hand(hand):
     return max(hands, key=hand_rank) 
 
 def process_hand(hand):
-    
+    print hand 
     wild_hand, wild_card = find_wild(hand) 
-
+    
     if (wild_card == None):
         return hand
-    
-    for hand in expand_wild(wild_hand, wild_card):
-        process_hand(hand)
 
+    hands = []
+    for hand in expand_wild(wild_hand, wild_card):
+        hands.append(process_hand(hand))
+    
+    return hands
 
 def find_wild(hand):
     for i in range(len(hand)):
@@ -133,7 +135,6 @@ def two_pair(ranks):
         return None
 
 def test_best_wild_hand():
-    #print (best_wild_hand("6C 7C 8C 9C TC 5C ?B".split()))
     assert (sorted(best_wild_hand("6C 7C 8C 9C TC 5C ?B".split()))
             == ['7C', '8C', '9C', 'JC', 'TC'])
     assert (sorted(best_wild_hand("TD TC 5H 5C 7C ?R ?B".split()))
