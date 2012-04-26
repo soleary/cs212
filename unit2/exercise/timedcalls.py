@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # ----------------
 # User Instructions
 #
@@ -61,14 +62,12 @@ def timedcalls(n, fn, *args):
         #loop n times
         times = [ timedcall(fn, *args)[0] for i in range(n) ]
     else:
-        #count up to n seconds
+        # Run it 100 million times, or n seconds, whiever comes first
         times = []
-        for i in range(1000000):
-            times.append( timedcall(fn, *args) )
-            if sum(times) >= n:
-                break
+        while sum(times) < n:
+            times.append( timedcall(fn, *args)[0] )
 
     return min(times), average(times), max(times)
 
-print timedcalls(5,   zebra_puzzle)
-#print timedcalls(5.0, zebra_puzzle)
+print timedcalls(500,   zebra_puzzle)
+print timedcalls(1.0, zebra_puzzle)
