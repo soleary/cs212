@@ -40,13 +40,15 @@ def best_wild_hand(hand):
     "Try all values for jokers in all 5-card selections."
     hands = []
     for hand in itertools.combinations(hand, 5):
-        print hand
+        #print hand
         hands.append(process_hand(list(hand)))
-            
+    #print hands       
+    #handset = set(hands) 
+    #return max(handset, key=hand_rank) 
     return max(hands, key=hand_rank) 
 
 def process_hand(hand):
-    print hand 
+    #print hand 
     wild_hand, wild_card = find_wild(hand) 
     
     if (wild_card == None):
@@ -54,7 +56,8 @@ def process_hand(hand):
 
     hands = []
     for hand in expand_wild(wild_hand, wild_card):
-        hands.append(process_hand(hand))
+        #hands.append(process_hand(hand))
+        hands += process_hand(hand)
     
     return hands
 
@@ -68,7 +71,14 @@ def find_wild(hand):
     return hand, None
 
 def expand_wild(hand, wild_card):
-    return [ hand.append(card) for card in jokers[wild_card[1]] ]
+    hands = []
+    for card in jokers[wild_card[1]]:
+        myhand = hand
+        myhand.append(card)
+        hands += hand
+
+    print hands
+    return hands
 
 # ------------------
 # Provided Functions
@@ -101,7 +111,6 @@ def hand_rank(hand):
 
 def card_ranks(hand):
     "Return a list of the ranks, sorted with higher first."
-    print hand
     ranks = ['--23456789TJQKA'.index(r) for r, s in hand]
     ranks.sort(reverse = True)
     return [5, 4, 3, 2, 1] if (ranks == [14, 5, 4, 3, 2]) else ranks
