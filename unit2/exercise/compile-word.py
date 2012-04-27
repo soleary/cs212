@@ -14,16 +14,11 @@ def compile_word(word):
     """Compile a word of uppercase letters as numeric digits.
     E.g., compile_word('YOU') => '(1*U+10*O+100*Y)'
     Non-uppercase words unchanged: compile_word('+') => '+'"""
-    if re.findall('[A-Z]', word) == len(word):
+    if word.isupper():
+        ops = [ str( 10**i ) + '*' + char for i, char in enumerate(word[::-1]) ]
+        return '(' + '+'.join(ops) + ')'
+    else:
         return word
-
-    place = 1
-    ops = []
-    for char in reversed(word):
-        ops.append( str(place) + '*' + char )
-        place = place * 10
-
-    return '(' + '+'.join(ops) + ')'
 
 
 print compile_word('I')
