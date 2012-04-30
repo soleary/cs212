@@ -20,17 +20,24 @@
 
 import itertools
 
-floors = 5
+floors = bottom, _, _, _, top = [ 1, 2, 3, 4, 5 ]
 
 def ishigher(f1, f2): return f1 > f2 
 
-def isadjcent(f1, f2): return abs(f1 - f2) == 1
-
-def istop(f): return f == floors
-
-def isbottom(f): return f == 1
+def notadjcent(f1, f2): return abs(f1 - f2) > 1
 
 def floor_puzzle():
-    [ Hooper, Kay, Liskov, Perlis, Ritchie ] = itertools.permutations()
+    orderings = list(itertools.permutations(floors))
+    return next(
+            [Hopper, Kay, Liskov, Perlis, Ritchie]
+            for (Hopper, Kay, Liskov, Perlis, Ritchie) in orderings
+            if Hopper is not top
+            if Kay is not bottom
+            if Liskov is not bottom
+            if Liskov is not top
+            if ishigher(Perlis, Kay)
+            if notadjcent(Ritchie, Liskov)
+            if notadjcent(Liskov, Kay)
+            )
 
-    return [Hopper, Kay, Liskov, Perlis, Ritchie]
+print floor_puzzle()
