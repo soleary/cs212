@@ -20,6 +20,17 @@
 
 import itertools
 
+floors = 5
+
+def ishigher(f1, f2): return f1 > f2 
+
+def isadjcent(f1, f2): return abs(f1 - f2) == 1
+
+def istop(f): return f == floors
+
+def isbottom(f): return f == 1
+
 def floor_puzzle():
-    # Your code here
+    [ Hooper, Kay, Liskov, Perlis, Ritchie ] = itertools.permutations()
+
     return [Hopper, Kay, Liskov, Perlis, Ritchie]

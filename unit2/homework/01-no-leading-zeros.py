@@ -11,7 +11,7 @@ import re
 import itertools
 import string
 
-def compile_formula(formula, verbose=False):
+def compile_formula(formula, verbose=True):
     """Compile formula into a function. Also return letters found, as a str,
     in same order as parms of function. The first digit of a multi-digit 
     number can't be 0. So if YOU is a word in the formula, and the function
@@ -22,6 +22,7 @@ def compile_formula(formula, verbose=False):
     letters = ''.join(set(re.findall('[A-Z]', formula)))
     parms = ', '.join(letters)
     tokens = map(compile_word, re.split('([A-Z]+)', formula))
+    print tokens
     body = ''.join(tokens)
     f = 'lambda %s: %s' % (parms, body)
     if verbose: print f
@@ -56,3 +57,5 @@ def test():
     assert faster_solve('YOU == ME**2') == ('289 == 17**2' or '576 == 24**2' or '841 == 29**2')
     assert faster_solve('X / X == X') == '1 / 1 == 1'
     return 'tests pass'
+
+print test()

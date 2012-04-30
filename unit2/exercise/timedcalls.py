@@ -69,5 +69,5 @@ def timedcalls(n, fn, *args):
 
     return min(times), average(times), max(times)
 
-print timedcalls(500,   zebra_puzzle)
+print timedcalls(500, zebra_puzzle)
 print timedcalls(1.0, zebra_puzzle)
