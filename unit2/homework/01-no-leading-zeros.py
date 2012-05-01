@@ -21,9 +21,15 @@ def compile_formula(formula, verbose=True):
 
     letters = ''.join(set(re.findall('[A-Z]', formula)))
     parms = ', '.join(letters)
-    tokens = map(compile_word, re.split('([A-Z]+)', formula))
-    print tokens
-    body = ''.join(tokens)
+    tokens = re.split('([A-Z]+)', formula)
+    initials = [ t[0] for t in tokens if len(t) > 1 and t.isupper() ]
+    comp_tokens = map(compile_word, tokens)
+    print initials
+    non_zero_check = ''
+    if len(initials) > 0:
+        non_zero_check = ' and ' + '+'.join(initials) + '>=' + str(len(initials)) 
+
+    body = '(' + ''.join(comp_tokens) + non_zero_check + ')'
     f = 'lambda %s: %s' % (parms, body)
     if verbose: print f
     return eval(f), letters
