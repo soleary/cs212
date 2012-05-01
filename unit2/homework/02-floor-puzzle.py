@@ -29,7 +29,7 @@ def notadjcent(f1, f2): return abs(f1 - f2) > 1
 def floor_puzzle():
     orderings = list(itertools.permutations(floors))
     return next(
-            [Hopper, Kay, Liskov, Perlis, Ritchie]
+            [ Hopper, Kay, Liskov, Perlis, Ritchie ] 
             for (Hopper, Kay, Liskov, Perlis, Ritchie) in orderings
             if Hopper is not top
             if Kay is not bottom
