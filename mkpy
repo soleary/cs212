@@ -1,0 +1,14 @@
+#!/usr/bin/perl
+
+use autodie;
+
+my $name = $ARGV[0];
+$name = "$name.py" unless $name =~ /\.py$/;
+
+open my $prog, ">", $name;
+
+print $prog "#!/usr/bin/python\n";
+qx/ xclip -o >> $name /;
+qx/ echo "\n" >> $name /;
+qx/ chmod 755 $name /;
+qx/ git add $name /;
