@@ -15,31 +15,36 @@
 # below a certain threshold to be marked correct.
 
 def longest_subpalindrome_slice(text):
-    "Return (i, j) such that text[i:j] is the longest palindrome in text."
-    window = len(text)
+    """Return (i, j) such that text[i:j] is the longest palindrome in text.
+    This one returns the left-most largest palindrome."""    
+    end = window = len(text)
     startpos = 0
-    while window + startpos <= len(text):
-        while 
-        startpos += 1
-        j = i
-        while j <= len(text):
+    while window > 2:
+        string = text[startpos:startpos+window]
+        print string
+        print str(string.reversed())
+        if string == reversed(string):
+            print "Returning ", startpos, " and ", startpos+window
+            return startpos, startpos + window
 
-    return find_pal( start, start+1, text )
+        if startpos + window == end:
+            window -= 1;
+            startpos = 0;
+        else:
+            startpos += 1;
 
-def find_pal(l, r, text):
-    substr = text[l-r]
+    return None
 
-    
 def test():
     L = longest_subpalindrome_slice
-    #assert L('racecar') == (0, 7)
-    #assert L('Racecar') == (0, 7)
-    #assert L('RacecarX') == (0, 7)
-    #assert L('Race carr') == (7, 9)
-    #assert L('') == (0, 0)
-    #assert L('something rac e car going') == (8,21)
+    assert L('racecar') == (0, 7)
+    assert L('Racecar') == (0, 7)
+    assert L('RacecarX') == (0, 7)
+    assert L('Race carr') == (7, 9)
+    assert L('') == (0, 0)
+    assert L('something rac e car going') == (8,21)
     assert L('xxxxx') == (0, 5)
-    #assert L('Mad am I ma dam.') == (0, 15)
+    assert L('Mad am I ma dam.') == (0, 15)
     return 'tests pass'
 
 print test()
