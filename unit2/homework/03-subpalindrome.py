@@ -19,7 +19,7 @@ def longest_subpalindrome_slice(text):
     spaces = text.find(' ')
     if spaces % 2 == 1:
         print "Found it"
-        splitpos = spaces / 2 + 1
+         longest_subpalindrome_slice( text.(split.spaces / 2 + 1
 
     end = window = len(text)
     startpos = 0
