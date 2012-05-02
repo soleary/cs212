@@ -19,12 +19,12 @@ def longest_subpalindrome_slice(text):
     This one returns the left-most largest palindrome."""    
     end = window = len(text)
     startpos = 0
-    while window > 2:
-        string = text[startpos:startpos+window]
+    while window > 1:
+        string = text[startpos:startpos+window].lower() #.replace(' ', '')
         print string
-        print str(string.reversed())
-        if string == reversed(string):
-            print "Returning ", startpos, " and ", startpos+window
+        print string[::-1]
+        if string == string[::-1]:
+            print "Returning", (startpos, startpos+window)
             return startpos, startpos + window
 
         if startpos + window == end:
@@ -33,7 +33,7 @@ def longest_subpalindrome_slice(text):
         else:
             startpos += 1;
 
-    return None
+    return 0, 0 
 
 def test():
     L = longest_subpalindrome_slice
