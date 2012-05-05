@@ -30,8 +30,7 @@ def matchset(pattern, text):
     elif 'dot' == op:
         return set([text[1:]])
     elif 'oneof' == op:
-        
-        return 
+        return matchset(('lit', x), text)
     elif 'eol' == op:
         return set(['']) if text == '' else null
     elif 'star' == op:
