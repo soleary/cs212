@@ -1,4 +1,4 @@
-youtube-dl -f 18 -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=X7ZQJRhjwD0
-youtube-dl -f 18 -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=hUOapEgmOjA
-youtube-dl -f 18 -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=Yuiiwdl4dC0
 youtube-dl -f 18 -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=-eWh-uYH1Kc
+youtube-dl -f 18 -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=Yuiiwdl4dC0
+youtube-dl -f 18 -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=hUOapEgmOjA
+youtube-dl -f 18 -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=X7ZQJRhjwD0
