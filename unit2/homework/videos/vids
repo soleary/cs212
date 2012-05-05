@@ -1,6 +1,6 @@
-youtube-dl -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=hoAg8q8nl_w
-youtube-dl -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=bjsXaFPlaPs
-youtube-dl -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=wo7ZmSLs7FI
-youtube-dl -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=qOLHWJZGRKM
-youtube-dl -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=qp3DkEOyfQ4
+youtube-dl -f 18 -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=hoAg8q8nl_w
+youtube-dl -f 18 -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=bjsXaFPlaPs
+youtube-dl -f 18 -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=wo7ZmSLs7FI
+youtube-dl -f 18 -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=qOLHWJZGRKM
+youtube-dl -f 18 -o "%(title)s.%(ext)s" http://www.youtube.com/watch?v=qp3DkEOyfQ4
 
