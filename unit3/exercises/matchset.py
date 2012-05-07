@@ -28,10 +28,9 @@ def matchset(pattern, text):
     elif 'alt' == op:
         return matchset(x, text) | matchset(y, text)
     elif 'dot' == op:
-        return set([text[1:]])
+        return set([text[1:]]) if text else null
     elif 'oneof' == op:
-        
-        return 
+        return matchset(('lit', x), text)
     elif 'eol' == op:
         return set(['']) if text == '' else null
     elif 'star' == op:
