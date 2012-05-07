@@ -10,7 +10,7 @@ def search(pattern, text):
     "Match pattern anywhere in text; return longest earliest match or None."
     for i in range(len(text)):
         m = match(pattern, text[i:])
-        if # your code here
+        if m:
             return m
         
 def match(pattern, text):
@@ -18,7 +18,7 @@ def match(pattern, text):
     remainders = matchset(pattern, text)
     if remainders:
         shortest = min(remainders, key=len)
-        return # your code here
+        return text[0:len(text)-len(shortest)]
     
 def components(pattern):
     "Return the op, x, and y arguments; x and y are None if missing."
