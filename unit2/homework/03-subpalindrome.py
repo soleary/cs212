@@ -14,28 +14,44 @@
 # the number of times you access each string. That count must be
 # below a certain threshold to be marked correct.
 
+# Get the candiates
+# for each candidate, expand window 2 chars, and apply
+# if palindrome, repeat
+# if not, return [ w, s, e ]
+# sort returns by w (window)
+# return largest value
+
+import re
+
 def longest_subpalindrome_slice(text):
     "Return (i, j) such that text[i:j] is the longest palindrome in text."
-    spaces = text.find(' ')
-    if spaces % 2 == 1:
-        print "Found it"
-         longest_subpalindrome_slice( text.(split.spaces / 2 + 1
+    candidates = []
+    print '|' + text + '|'
+    for p in ('(.).\\1', '(.)\\1'):
+        matches = re.finditer(p, text)
+        candidates += [ [m.start(), m.end()] for m in matches ]
 
-    end = window = len(text)
-    startpos = 0
-    while window > 1:
-        string = text[startpos:startpos+window].lower()
-        print string + ' <=> ' + string[::-1]
-        if string == string[::-1]:
-            return startpos, startpos + window
+    print candidates
+    palindromes = []
+    for c in candidates:
+        l = longest_palindrome(c[0], c[1], text)
+        palindromes.append(l)
 
-        if startpos + window == end:
-            window -= 1;
-            startpos = 0;
-        else:
-            startpos += 1;
+    if len(palindromes) > 0:
+        return max(palindromes)[1:2]
+    else:
+        return 0, 0
 
-    return 0, 0
+def longest_palindrome(s, e, text):
+    if s == 0 or e == len(text):
+        return ( e - s, s, e )
+
+    if text[s:e] <> text[e:s]:
+        print text[s:e] 
+        print text[s:e]
+        return ( e - s, s, e )
+    else:
+        return longest_palindrome(s - 1, e + 1, text)
 
 def test():
     L = longest_subpalindrome_slice
@@ -43,6 +59,7 @@ def test():
     assert L('Racecar') == (0, 7)
     assert L('RacecarX') == (0, 7)
     assert L('Race carr') == (7, 9)
+    assert L('caecarr') == (5, 7)
     assert L('') == (0, 0)
     assert L('something rac e car going') == (8,21)
     assert L('xxxxx') == (0, 5)
