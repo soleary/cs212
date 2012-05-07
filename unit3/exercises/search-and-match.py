@@ -10,7 +10,7 @@ def search(pattern, text):
     "Match pattern anywhere in text; return longest earliest match or None."
     for i in range(len(text)):
         m = match(pattern, text[i:])
-        if m:
+        if m is not None:
             return m
         
 def match(pattern, text):
