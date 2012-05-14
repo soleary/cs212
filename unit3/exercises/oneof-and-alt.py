@@ -6,10 +6,10 @@
 # for the patterns alt(x, y) and oneof(chars). 
 
 def lit(s):         return lambda Ns: set([s]) if len(s) in Ns else null
-def alt(x, y):      return lambda Ns: # your code here
+def alt(x, y):      return lambda Ns: set([x], [y]) if len(x+y) in Ns else null
 def star(x):        return lambda Ns: opt(plus(x))(Ns)
 def plus(x):        return lambda Ns: genseq(x, star(x), Ns, startx=1) #Tricky
-def oneof(chars):   return lambda Ns: # your code here
+def oneof(chars):   return lambda Ns: 
 def seq(x, y):      return lambda Ns: genseq(x, y, Ns)
 def opt(x):         return alt(epsilon, x)
 dot = oneof('?')    # You could expand the alphabet to more chars.
@@ -33,3 +33,4 @@ def test():
     
     return 'tests pass'
 
+print test() 

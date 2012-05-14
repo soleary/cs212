@@ -8,13 +8,13 @@
 
 def lit(string):  return ('lit', string)
 def seq(x, y):    return ('seq', x, y)
-def alt(x, y):    # ??
-def star(x):      # ??
-def plus(x):      # ??
+def alt(x, y):    return ('alt', x, y)
+def star(x):      return ('star',x)
+def plus(x):      return seq(x, star(x))
 def opt(x):       return alt(lit(''), x) #opt(x) means that x is optional
 def oneof(chars): return ('oneof', tuple(chars))
 dot = ('dot',)
-eol = #??
+eol = ('eol',)
 
 def test():
     assert lit('abc')         == ('lit', 'abc')

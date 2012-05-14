@@ -7,7 +7,7 @@
 
 def match(pattern, text):
     "Match pattern against start of text; return longest match found or None."
-    remainders = # your code here.
+    remainders = pattern(text)
     if remainders:
         shortest = min(remainders, key=len)
         return text[:len(text)-len(shortest)]
@@ -32,3 +32,4 @@ def test():
     assert match(oneof('xyz'), '   x is here!') == None
     return 'tests pass'
 
+print test() 
