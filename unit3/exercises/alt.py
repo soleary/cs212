@@ -20,7 +20,8 @@ def lit(s): return lambda text: set([text[len(s):]]) if text.startswith(s) else 
 
 def seq(x, y): return lambda text: set().union(*map(y, x(text)))
 
-def alt(x, y): # your code here
+# Call the compiler again?
+def alt(x, y): return lambda text: x(text) | y(text)  
         
 null = frozenset([])
 

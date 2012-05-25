@@ -26,7 +26,6 @@ import re
 def longest_subpalindrome_slice(text):
     "Return (i, j) such that text[i:j] is the longest palindrome in text."
     candidates = []
-    print '|' + text + '|'
     for p in ('(.).\\1', '(.)\\1'):
         matches = re.finditer(p, text)
         candidates += [ [m.start(), m.end()] for m in matches ]
@@ -38,20 +37,24 @@ def longest_subpalindrome_slice(text):
         palindromes.append(l)
 
     if len(palindromes) > 0:
-        return max(palindromes)[1:2]
+        print palindromes
+        print "Returning ", max(palindromes)[1:]
+        return max(palindromes)[1:]
     else:
         return 0, 0
 
 def longest_palindrome(s, e, text):
-    if s == 0 or e == len(text):
-        return ( e - s, s, e )
 
-    if text[s:e] <> text[e:s]:
-        print text[s:e] 
-        print text[s:e]
-        return ( e - s, s, e )
-    else:
+    if s <= 0:
+        e += 1
+    elif e >= len(text):
+        s -= 1
+   
+    string = text[s:e]
+    if string == string[::-1]:
         return longest_palindrome(s - 1, e + 1, text)
+    else:
+        return [ e - s, s, e ]
 
 def test():
     L = longest_subpalindrome_slice
